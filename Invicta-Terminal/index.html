@@ -71,7 +71,7 @@
             return 'Hello! Type "help" to see the commands. Click <a href="commands.html">here</a> to view the command docs';
         }
         function help() {
-            return 'Commands:<br>hello(): say hello<br>print(str/int text): prints text<br>echo(str/int text, str output): outputs the text to the output command as an input.<br>Click <a href="commands.html">here</a> to view the command docs'
+            return 'Commands:<br>hello(): say hello<br>print(str/int text): prints text<br>echo(str/int text, str output): outputs the text to the output command as an input.<br>download(str name): opens an exension\'s code. To install the extension, copy the code into a file [name].js in the Invicta-Terminal/extensions/ folder<br>Click <a href="commands.html">here</a> to view the command docs'
         }
         function print(text) {
             if (text) {
@@ -92,8 +92,7 @@
             }
         }
         function download(name) {
-            document.body.innerHTML += `<a download="${name}.js" href="https://raw.githubusercontent.com/l-7777777/Invicta-OS/master/Invicta-Terminal/extension-library/${name}" id="download"></a>`;
-            document.getElementById("download").click;
+            window.location.assign(`https://raw.githubusercontent.com/l-7777777/Invicta-OS/master/Invicta-Terminal/extension-library/${name}.js`)
         }
     </script>
 </body>
