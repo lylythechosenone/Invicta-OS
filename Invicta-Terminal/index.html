@@ -21,6 +21,10 @@
             display: inline;
             outline: none;
         }
+
+        a {
+            color: white;
+        }
     </style>
 </head>
 
@@ -29,12 +33,12 @@
         window.onload = function () { start(); }
         function start() {
             document.body.innerHTML += `<p id="info">Invicta Terminal V1.0.0. Running on ${navigator.userAgent}</p>`;
-            document.body.innerHTML += `<p id="prompt">iRepublic/§/&nbsp</p>`;
+            document.body.innerHTML += `<p id="prompt">iRepublic/$/&nbsp</p>`;
             document.body.innerHTML += `<p id="input" contenteditable spellcheck="false"></p>`
             document.getElementById("input").focus();
-            document.getElementById("input").addEventListener("keyup", newline);
+            document.getElementById("input").addEventListener("keyup", key);
         }
-        function newline() {
+        function key() {
             if (event.key === "Enter") {
                 document.getElementById("input").innerHTML = document.getElementById("input").textContent;
                 if (document.getElementById("input").textContent.includes("(") && document.getElementById("input").textContent.includes(")")) {
@@ -45,22 +49,29 @@
                 } else {
                     document.body.innerHTML += `<p id="output">Incorrect syntax! ${document.getElementById("input").textContent.concat("()")} needs input.</p>`
                 }
+                if (document.getElementById("input-old")) {
+                    document.getElementById("input-old").id = "input-dead";
+                    document.getElementById("prompt-old").id = "input-dead";
+                }
                 document.getElementById("input").id = "input-old";
                 document.getElementById("prompt").id = "prompt-old";
                 document.getElementById("input-old").contentEditable = false;
-                document.body.innerHTML += `<p id="prompt">iRepublic/§/&nbsp</p>`;
+                document.body.innerHTML += `<p id="prompt">iRepublic/$/&nbsp</p>`;
                 document.body.innerHTML += `<p id="input" contenteditable spellcheck="false"></p>`
                 document.getElementById("input").focus();
-                document.getElementById("input").addEventListener("keyup", newline);
+                document.getElementById("input").addEventListener("keyup", key);
+            } else if (event.key === "ArrowUp") {
+                document.getElementById("input").textContent = document.getElementById("input-old").textContent;
+                document.getElementById("input").addEventListener("keyup", key);
             } else {
-                document.getElementById("input").addEventListener("keyup", newline);
+                document.getElementById("input").addEventListener("keyup", key);
             }
         }
         function hello() {
-            return 'Hello! Type "help" to see the commands';
+            return 'Hello! Type "help" to see the commands. Click <a href="commands.html">here</a> to view the command docs';
         }
         function help() {
-            return 'Commands:<br>hello(): say hello<br>print(str/int text): prints text<br>echo(str/int text, str output): outputs the text to the output command as an input.'
+            return 'Commands:<br>hello(): say hello<br>print(str/int text): prints text<br>echo(str/int text, str output): outputs the text to the output command as an input.<br>Click <a href="commands.html">here</a> to view the command docs'
         }
         function print(text) {
             if (text) {
@@ -79,6 +90,10 @@
             } else {
                 return "Incorrect syntax! echo() needs input."
             }
+        }
+        function download(name) {
+            document.body.innerHTML += `<a download="${name}.js" href="https://raw.githubusercontent.com/l-7777777/Invicta-OS/master/Invicta-Terminal/extension-library/${name}" id="download"></a>`;
+            document.getElementById("download").click;
         }
     </script>
 </body>
