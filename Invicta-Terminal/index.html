@@ -37,7 +37,14 @@
         function newline() {
             if (event.key === "Enter") {
                 document.getElementById("input").innerHTML = document.getElementById("input").textContent;
-                document.body.innerHTML += `<p id="output">${eval(document.getElementById("input").textContent.concat("();"))}</p>`
+                if (document.getElementById("input").textContent.includes("(") && document.getElementById("input").textContent.includes(")")) {
+                    document.body.innerHTML += `<p id="output">${eval(document.getElementById("input").textContent.concat(";"))}</p>`
+                } else if (!document.getElementById("input").textContent.includes("(") && !document.getElementById("input").textContent.includes("print")) {
+                    document.body.innerHTML += `<p id="output">Incorrect syntax! We'll run ${document.getElementById("input").textContent.concat("()")} for you.</p>`
+                    document.body.innerHTML += `<p id="output">${eval(document.getElementById("input").textContent.concat("();"))}</p>`
+                } else {
+                    document.body.innerHTML += `<p id="output">Incorrect syntax! ${document.getElementById("input").textContent.concat("()")} needs input.</p>`
+                }
                 document.getElementById("input").id = "input-old";
                 document.getElementById("prompt").id = "prompt-old";
                 document.getElementById("input-old").contentEditable = false;
@@ -53,7 +60,25 @@
             return 'Hello! Type "help" to see the commands';
         }
         function help() {
-            return 'Commands:<br>hello: say hello<br>print &lttext&gt: print some text'
+            return 'Commands:<br>hello(): say hello<br>print(str/int text): prints text<br>echo(str/int text, str output): outputs the text to the output command as an input.'
+        }
+        function print(text) {
+            if (text) {
+                return text;
+            } else {
+                return "Incorrect syntax! print() needs input.";
+            }
+        }
+        function echo(text, output) {
+            if (text && output) {
+                if (output == "shell") {
+                    return text;
+                } else {
+                    return eval(output.concat("(").concat(text).concat(");"));
+                }
+            } else {
+                return "Incorrect syntax! echo() needs input."
+            }
         }
     </script>
 </body>
