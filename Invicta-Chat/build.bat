@@ -1,1 +1,0 @@
-electron-packager ./ || npm install electron-packager -g && electron-packager ./
