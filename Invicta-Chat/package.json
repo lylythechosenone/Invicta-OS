@@ -1,0 +1,14 @@
+{
+  "name": "invicta-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Lysander Mealy and Josh Lee Liu",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.0"
+  }
+}

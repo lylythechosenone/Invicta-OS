@@ -49,19 +49,12 @@
                 } else {
                     document.body.innerHTML += `<p id="output">Incorrect syntax! ${document.getElementById("input").textContent.concat("()")} needs input.</p>`
                 }
-                if (document.getElementById("input-old")) {
-                    document.getElementById("input-old").id = "input-dead";
-                    document.getElementById("prompt-old").id = "input-dead";
-                }
                 document.getElementById("input").id = "input-old";
                 document.getElementById("prompt").id = "prompt-old";
                 document.getElementById("input-old").contentEditable = false;
                 document.body.innerHTML += `<p id="prompt">iRepublic/$/&nbsp</p>`;
                 document.body.innerHTML += `<p id="input" contenteditable spellcheck="false"></p>`
                 document.getElementById("input").focus();
-                document.getElementById("input").addEventListener("keyup", key);
-            } else if (event.key === "ArrowUp") {
-                document.getElementById("input").textContent = document.getElementById("input-old").textContent;
                 document.getElementById("input").addEventListener("keyup", key);
             } else {
                 document.getElementById("input").addEventListener("keyup", key);
@@ -90,6 +83,9 @@
             } else {
                 return "Incorrect syntax! echo() needs input."
             }
+        }
+        function admin() {
+            return 'To acces admin, open www.invictarepublic.org/admin.php in your browser.'
         }
     </script>
 </body>
